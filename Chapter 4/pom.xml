@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.packtpub.mmj</groupId>
+    <artifactId>4801_chapter4</artifactId>
+    <version>PACKT-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <parent>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-parent</artifactId>
+        <version>Angel.SR4</version>
+    </parent>
+
+    <modules>
+        <module>eureka-service</module>
+        <module>restaurant-service</module>
+        <module>booking-service</module>
+        <module>user-service</module>
+    </modules>
+
+    <!-- Build step is required to include the spring boot artifacts in generated jars -->
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- Added repository additionally as Angel.SR4 was not available in central repository -->
+    <repositories>
+        <repository>
+            <id>spring-libs-release</id>
+            <url>http://repo.spring.io/libs-release-local</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-libs-release</id>
+            <url>http://repo.spring.io/libs-release-local</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <name>4801_chapter4</name>
+    <description>Master Microservices with Java, Chapter 4 - Implementing Microservices</description>
+</project>
