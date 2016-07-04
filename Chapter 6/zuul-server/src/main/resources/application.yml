@@ -1,0 +1,85 @@
+info:
+    component: Zuul Server
+# Spring properties
+spring:
+  application:
+     name: zuul-server  # Service registers under this name
+
+endpoints:
+    restart:
+        enabled: true
+    shutdown:
+        enabled: true
+    health:
+        sensitive: false
+
+zuul:
+    ignoredServices: "*"
+    routes:
+        restaurantapi:
+            path: /api/**
+            serviceId: api-service
+            stripPrefix: true
+
+server:
+    ssl:
+        key-store: classpath:keystore.jks
+        key-store-password: password
+        key-password: password
+    port: 8765
+    compression:
+        enabled: true
+
+security:
+  oauth2:
+    resource:
+      userInfoUri: https://localhost:9001/auth/user
+      
+hystrix:
+  threadpool:
+    default:
+      # Maximum number of concurrent requests when using thread pools (Default: 10)
+      coreSize: 100
+      # Maximum LinkedBlockingQueue size - -1 for using SynchronousQueue (Default: -1)
+      maxQueueSize: -1
+      # Queue size rejection threshold (Default: 5)
+      queueSizeRejectionThreshold: 5
+  command:
+    default:
+      circuitBreaker:
+        sleepWindowInMilliseconds: 30000
+        requestVolumeThreshold: 2
+      execution:
+        isolation:
+#          strategy: SEMAPHORE, no thread pool but timeout handling stops to work
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 6000
+
+
+# Discovery Server Access
+eureka:
+    instance:
+        leaseRenewalIntervalInSeconds: 5
+        leaseExpirationDurationInSeconds: 5
+        metadataMap:
+            instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${random.value}}}
+
+    client:
+        registryFetchIntervalSeconds: 5
+        instanceInfoReplicationIntervalSeconds: 5
+        initialInstanceInfoReplicationIntervalSeconds: 5
+        serviceUrl:
+            defaultZone: ${vcap.services.${PREFIX:}eureka.credentials.uri:http://user:password@localhost:8761}/eureka/
+        fetchRegistry: true
+        healthcheck:
+            enabled: true
+
+logging:
+    level:
+      ROOT: INFO
+      org.springframework.web: INFO
+
+app:
+  ConnectTimeout: 100
+  ReadTimeout: 3000

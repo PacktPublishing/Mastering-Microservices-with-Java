@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author sousharm
+ * @author Sourabh Sharma
  */
 @RestController
 @RequestMapping("/v1/user")
@@ -69,15 +69,14 @@ public class UserController {
     }
 
     /**
-     * Fetch users with the given id.
-     * <code>http://.../v1/users/{restaurant_id}</code> will return user with
-     * given id.
+     * Fetch users with the given id. <code>http://.../v1/users/{id}</code> will
+     * return user with given id.
      *
      * @param id
      * @return A non-null, non-empty collection of users.
      */
-    @RequestMapping(value = "/{restaurant_id}", method = RequestMethod.GET)
-    public ResponseEntity<Entity> findById(@PathVariable("restaurant_id") String id) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Entity> findById(@PathVariable("id") String id) {
         logger.info(String.format("user-service findById() invoked:{} for {} ", userService.getClass().getName(), id));
         id = id.trim();
         Entity user;

@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-md-12">
+        <ol class="breadcrumb">
+            <li><a ui-sref="restaurants">Restaurants</a></li>
+            <li class="active">{{restaurant.name}}</li>
+        </ol>
+        <div class="bs-docs-section">
+            <h1 class="page-header">{{restaurant.name}}</h1>
+            <div>
+                <strong>Address:</strong> {{restaurant.address}}
+            </div>
+            </br></br>
+            <form ng-submit="book()">
+                <div class="input-append date form_datetime">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <p class="input-group">
+                                <span style="display: table-cell; vertical-align: middle; font-weight: bolder; font-size: 1.2em">Select Date & Time for Booking:</span>
+                                <span style="display: table-cell; vertical-align: middle">
+                                    <input type="text" size=20 class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                </span>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            <uib-timepicker ng-model="tm" ng-change="changed()" hour-step="hstep" minute-step="mstep"></uib-timepicker>
+                            </p>
+                        </div>
+                    </div></div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Reserve</button>
+                </div>
+            </form></br></br>
+        </div>
+    </div>
+</div>

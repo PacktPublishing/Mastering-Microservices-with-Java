@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.packtpub.mmj</groupId>
+        <artifactId>4801_chapter7</artifactId>
+        <version>PACKT-SNAPSHOT</version>
+    </parent>
+
+    <name>online-table-reservation:eureka-server</name>
+    <artifactId>eureka-server</artifactId>
+    <packaging>jar</packaging>
+    <properties>
+        <start-class>com.packtpub.mmj.eureka.service.App</start-class>
+        <docker.registry.name>localhost:5000/</docker.registry.name>
+        <docker.repository.name>${docker.registry.name}sourabhh/${project.artifactId}</docker.repository.name>
+        <docker.host.address>192.168.99.100</docker.host.address>
+        <docker.port>8761</docker.port>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka-server</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jolokia</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.13.7</version>
+                <configuration>
+                    <sourceDirectory>../docker</sourceDirectory>
+                    <images>
+                        <image>
+                            <name>${docker.repository.name}:${project.version}</name>
+                            <alias>${project.artifactId}</alias>
+                            <build>
+                                <from>java:8-jre</from>
+                                <maintainer>sourabhh</maintainer>
+                                <assembly>
+                                    <descriptor>docker-assembly.xml</descriptor>
+                                </assembly>
+                                <ports>
+                                    <port>${docker.port}</port>
+                                </ports>
+                                <cmd>
+                                    <shell>java -Dspring.profiles.active="docker" -jar \
+                                        /maven/${project.build.finalName}.jar server \
+                                        /maven/docker-config.yml</shell>
+                                </cmd>
+                            </build>
+                            <run>
+                                <namingStrategy>alias</namingStrategy>
+                                <ports>
+                                    <port>${docker.port}:8761</port>
+                                </ports>
+                                <volumes>
+                                    <bind>
+                                        <volume>${user.home}/logs:/logs</volume>
+                                    </bind>
+                                </volumes>
+                                <wait>
+                                    <url>http://${docker.host.address}:${docker.port}/</url>
+                                    <time>500000</time>
+                                </wait>
+                                <log>
+                                    <prefix>${project.artifactId}</prefix>
+                                    <color>cyan</color>
+                                </log>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

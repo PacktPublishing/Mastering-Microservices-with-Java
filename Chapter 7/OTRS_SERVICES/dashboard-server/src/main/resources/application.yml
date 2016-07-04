@@ -1,0 +1,33 @@
+# Hystrix Dashboard properties
+spring:
+    application:
+        name: dashboard-server
+
+endpoints:
+    restart:
+        enabled: true
+    shutdown:
+        enabled: true
+
+server:
+    port: 7979
+
+eureka:
+    instance:
+        leaseRenewalIntervalInSeconds: 3
+        metadataMap:
+            instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${random.value}}}
+
+    client:
+        # Default values comes from org.springframework.cloud.netflix.eurek.EurekaClientConfigBean
+        registryFetchIntervalSeconds: 5
+        instanceInfoReplicationIntervalSeconds: 5
+        initialInstanceInfoReplicationIntervalSeconds: 5
+        serviceUrl:
+            defaultZone: http://localhost:8761/eureka/
+        fetchRegistry: false
+
+logging:
+    level:
+        ROOT: WARN
+        org.springframework.web: WARN

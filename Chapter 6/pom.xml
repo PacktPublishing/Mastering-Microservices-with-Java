@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.packtpub.mmj</groupId>
+    <artifactId>4801_chapter6</artifactId>
+    <version>PACKT-SNAPSHOT</version>
+    <name>4801_chapter6</name>
+    <packaging>pom</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <modules>
+        <module>zuul-server</module>
+        <module>restaurant-service</module>
+        <module>eureka-server</module>
+        <module>dashboard-server</module>
+        <module>turbine-server</module>
+        <module>common</module>
+        <module>user-service</module>
+        <module>security-service</module>
+        <module>api-service</module>
+        <module>booking-service</module>
+    </modules>
+
+    <!-- profiles>
+        <profile>
+            <id>docker</id>
+            <properties>
+                <spring.profiles.active>docker</spring.profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <spring.profiles.active>dev</spring.profiles.active>
+            </properties>
+        </profile>
+    </profiles -->
+    <!-- Build step is required to include the spring boot artifacts in generated jars-->
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.3.5.RELEASE</version>
+    </parent>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Brixton.SR1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+        </dependency>
+    </dependencies>
+    <description>Master Microservices with Java, Chapter 6</description>
+</project>

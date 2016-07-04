@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="otrsApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="otrsApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="otrsApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="otrsApp" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Online Table Reservation System</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <link rel="shortcut icon" href="favicon.ico"/>
+        <link rel="stylesheet" href="styles/application.css" />
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script data-require="ui-bootstrap" data-semver="1.2.2" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script type="text/javascript" src="bower_components/ngstorage/ngStorage.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
+        <script type="text/javascript" src="scripts/templates.js"></script>
+        <script type="text/javascript" src="scripts/app.js"></script>
+        <script type="text/javascript" src="scripts/AjaxHandler.js"></script>
+        <script type="text/javascript" src="scripts/httperror/httperror.js"></script>
+        <script type="text/javascript" src="scripts/login/login.js"></script>
+        <script type="text/javascript" src="scripts/restaurants/restaurants.js"></script>
+    </head>
+
+    <body ng-controller="otrsAppCtrl">
+        <!-- BEGIN PAGE SPINNER -->
+        <div ng-spinner-bar class="page-spinner-bar">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+        <!-- END PAGE SPINNER -->
+
+        <!-- BEGIN HEADER -->
+        <nav class="navbar navbar-default" role="navigation">
+
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    Online Table Reservation System
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'" ng-click="navCollapsed = true">
+                <form class="navbar-form navbar-left" role="search" ng-submit="search()">
+                    <div class="form-group">
+                        <input type="text" id="searchedValue" ng-model="searchedValue" class="form-control" placeholder="Search Restaurants">
+                    </div>
+                    <button type="submit" class="btn btn-default" ng-click="">Go</button>
+                </form>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/login">Welcome {{currentUser}}!</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+
+        </nav>
+        <!-- END HEADER -->
+
+        <div class="clearfix"></div>
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container container">
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <!-- BEGIN ACTUAL CONTENT -->
+                    <div ui-view class="fade-in-up"></div>
+                    <!-- END ACTUAL CONTENT -->
+                </div>
+            </div>
+            <!-- END CONTENT -->
+        </div>
+        <!-- loading spinner -->
+        <div id="loadingSpinnerId" ng-show="isSpinnerShown()" style="top:0; left:45%; position:absolute; z-index:999">
+            <script type="text/ng-template" id="alert.html">
+                <div class="alert alert-warning" role="alert">
+                <div ng-transclude></div>
+                </div>
+            </script>
+            <uib-alert type="warning" template-url="alert.html"><b>Loading...</b></uib-alert>
+        </div>
+        <!-- END CONTAINER -->
+
+        <!-- BEGIN FOOTER -->
+        <div class="page-footer">
+            <hr/><div style="padding: 0 39%">&copy; 2016 Online Table Reservation System</div>
+        </div>
+        <!-- END FOOTER -->
+    </body>
+</html>

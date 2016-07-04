@@ -1,0 +1,25 @@
+<div ng-controller="LoginCtrl as loginC" style="max-width: 300px">
+    <h3>Login</h3>
+    <div class="form-container">
+        <!-- % if(locals.error) { %>
+        <div class="alert alert-danger"><%= error %></div>
+        <% } %>
+        <% if(locals.success) { %>
+        <div class="alert alert-success"><%= success %></div>
+        <% } % -->
+        <form ng-submit="loginC.submit(_email, _password)">
+            <div class="form-group">
+                <label for="username" class="sr-only">Username</label>
+                <input type="text" id="username" class="form-control" placeholder="username" ng-model="_email" required autofocus />
+            </div>
+            <div class="form-group">
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="password" ng-model="_password" />
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Login</button>
+                <button class="btn btn-link" ng-click="loginC.cancel()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

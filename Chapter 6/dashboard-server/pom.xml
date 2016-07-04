@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.packtpub.mmj</groupId>
+        <artifactId>4801_chapter6</artifactId>
+        <version>PACKT-SNAPSHOT</version>
+    </parent>
+    <artifactId>dashboard-server</artifactId>
+    <packaging>jar</packaging>
+    <name>online-table-reservation:dashboard-server</name>
+
+    <properties>
+        <start-class>com.packtpub.mmj.dashboard.DashboardApp</start-class>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
+        </dependency>
+    </dependencies>
+</project>

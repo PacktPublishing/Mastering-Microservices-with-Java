@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author sousharm
+ * @author Sourabh Sharma
  */
 @RestController
 @RequestMapping("/v1/restaurants")

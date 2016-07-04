@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.packtpub.mmj</groupId>
+        <artifactId>4801_chapter7</artifactId>
+        <version>PACKT-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>restaurant-service</artifactId>
+    <packaging>jar</packaging>
+    <name>online-table-reservation:restaurant-service</name>
+    <properties>
+        <start-class>com.packtpub.mmj.restaurant.RestaurantApp</start-class>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- For Docker hub leave empty; use "localhost:5000/" for a local Docker Registry -->
+        <docker.registry.name>localhost:5000/</docker.registry.name>
+        <docker.repository.name>${docker.registry.name}sourabhh/${project.artifactId}</docker.repository.name>
+        <docker.host.address>192.168.99.100</docker.host.address>
+        <docker.port>8080</docker.port>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jolokia</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.13.7</version>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>${docker.repository.name}:${project.version}</name>
+                            <alias>${project.artifactId}</alias>
+
+                            <build>
+                                <from>java:8-jre</from>
+                                <maintainer>sourabhh</maintainer>
+                                <assembly>
+                                    <descriptor>docker-assembly.xml</descriptor>
+                                </assembly>
+                                <ports>
+                                    <port>${docker.port}</port>
+                                </ports>
+                                <cmd>
+                                    <shell>java -Dspring.profiles.active="docker" -jar \
+                                        /maven/${project.build.finalName}.jar server \
+                                        /maven/docker-config.yml</shell>
+                                </cmd>
+                            </build>
+                            <run>
+                                <namingStrategy>alias</namingStrategy>
+                                <ports>
+                                    <port>${docker.port}:8080</port>
+                                </ports>
+                                <volumes>
+                                    <bind>
+                                        <volume>${user.home}/logs:/logs</volume>
+                                    </bind>
+                                </volumes>
+                                <wait>
+                                    <url>http://${docker.host.address}:${docker.port}/v1/restaurants/1</url>
+                                    <time>500000</time>
+                                </wait>
+                                <log>
+                                    <prefix>${project.artifactId}</prefix>
+                                    <color>cyan</color>
+                                </log>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.19</version>
+                <configuration>
+                    <phase>integration-test</phase>
+                    <groups>com.packtpub.mmj.restaurant.resources.docker.DockerIntegrationTest</groups>
+                    <systemPropertyVariables>
+                        <service.url>http://${docker.host.address}:${docker.port}/</service.url>
+                    </systemPropertyVariables>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <!--                            <goal>verify</goal>-->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <excludedGroups>com.packtpub.mmj.restaurant.resources.docker.DockerIntegrationTest</excludedGroups>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <!--        </profile>
+    </profiles>-->
+    <dependencies>
+        <dependency>
+            <groupId>com.packtpub.mmj</groupId>
+            <artifactId>online-table-reservation-common</artifactId>
+            <version>PACKT-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-netflix-hystrix-stream</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <!-- Testing starter -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+    </dependencies>
+</project>

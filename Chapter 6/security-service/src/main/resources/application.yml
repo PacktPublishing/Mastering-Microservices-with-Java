@@ -1,0 +1,19 @@
+info:
+    component:
+        Security Server
+
+server:
+    port: 9001
+    ssl:
+        key-store: classpath:keystore.jks
+        key-store-password: password
+        key-password: password
+    contextPath: /auth
+
+security:
+    user:
+        password: password
+
+logging:
+    level:
+        org.springframework.security: DEBUG

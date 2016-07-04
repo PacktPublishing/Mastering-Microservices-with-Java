@@ -18,7 +18,7 @@ public class InMemUserRepository implements UserRepository<User, String> {
     private Map<String, User> entities;
 
     /**
-     * Initialize the in-memory Restaurant Repository with empty Map
+     * Initialize the in-memory User Repository with empty Map
      */
     public InMemUserRepository() {
         entities = new HashMap();

@@ -74,13 +74,13 @@ public class UserServiceImpl extends BaseService<User, String>
 
     /**
      *
-     * @param restaurantId
+     * @param id
      * @return
      * @throws Exception
      */
     @Override
-    public Entity findById(String restaurantId) throws Exception {
-        return userRepository.get(restaurantId);
+    public Entity findById(String id) throws Exception {
+        return userRepository.get(id);
     }
 
     /**

@@ -1,7 +1,7 @@
 package com.packtpub.mmj.user.domain.service;
 
-import com.packtpub.mmj.user.domain.model.entity.User;
 import com.packtpub.mmj.user.domain.model.entity.Entity;
+import com.packtpub.mmj.user.domain.model.entity.User;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -35,11 +35,11 @@ public interface UserService {
 
     /**
      *
-     * @param restaurantId
+     * @param id
      * @return
      * @throws Exception
      */
-    public Entity findById(String restaurantId) throws Exception;
+    public Entity findById(String id) throws Exception;
 
     /**
      *

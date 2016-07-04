@@ -1,0 +1,56 @@
+# Spring properties
+spring:
+  application:
+     name: restaurant-service  # Service registers under this name
+  freemarker:
+    enabled: false           # Ignore Eureka dashboard FreeMarker templates
+  thymeleaf:
+    cache: false             # Allow Thymeleaf templates to be reloaded at runtime
+
+# HTTP Server
+server:
+  port: 0   # HTTP (Tomcat) port
+
+# Discovery Server Access
+eureka:
+    instance:
+        leaseRenewalIntervalInSeconds: 3
+        leaseExpirationDurationInSeconds: 2
+        metadataMap:
+            instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${random.value}}}
+
+    client:
+        registryFetchIntervalSeconds: 5
+        instanceInfoReplicationIntervalSeconds: 5
+        initialInstanceInfoReplicationIntervalSeconds: 5
+        serviceUrl:
+            defaultZone: ${vcap.services.${PREFIX:}eureka.credentials.uri:http://user:password@localhost:8761}/eureka/
+        fetchRegistry: true
+        healthcheck:
+            enabled: true
+
+
+---
+# For deployment in Docker containers
+spring:
+  profiles: docker
+
+server:
+  port: 8080
+
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    registryFetchIntervalSeconds: 5
+    instanceInfoReplicationIntervalSeconds: 5
+    initialInstanceInfoReplicationIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
+      fetchRegistry: true
+      healthcheck:
+        enabled: true
+
+

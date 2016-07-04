@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+    <action>
+        <actionName>CUSTOM-clean and package</actionName>
+        <displayName>clean and package</displayName>
+        <goals>
+            <goal>clean</goal>
+            <goal>package</goal>
+        </goals>
+    </action>
+    <action>
+        <actionName>CUSTOM-docker:build</actionName>
+        <displayName>docker:build</displayName>
+        <goals>
+            <goal>docker:build</goal>
+        </goals>
+    </action>
+    <action>
+        <actionName>CUSTOM-docker-start</actionName>
+        <displayName>docker:start</displayName>
+        <goals>
+            <goal>docker:start</goal>
+        </goals>
+    </action>
+</actions>
