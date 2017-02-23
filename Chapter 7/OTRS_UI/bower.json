@@ -1,5 +1,5 @@
 {
-    "name": "OTRS-UI",
+    "name": "otrs-ui",
     "description": "OTRS-UI",
     "version": "0.0.1",
     "license": "MIT",
@@ -16,5 +16,11 @@
         "ngstorage": "^0.3.10",
         "angular-resource": "^1.5.0",
         "html5-boilerplate": "~5.2.0"
+    },
+    "resolutions": {
+	"angular": "~1.5.0"
+    },
+    "install": {
+	"path": "bower_components"
     }
 }
