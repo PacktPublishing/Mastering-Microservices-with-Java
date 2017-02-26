@@ -31,7 +31,7 @@ paths =
     src: ['app/src/*.html']
     dest: 'public'
   bower:
-    src: ['app/bower_components/**/*']
+    src: ['bower_components/**/*']
     dest: 'public/bower_components'
 
 #move scripts to public

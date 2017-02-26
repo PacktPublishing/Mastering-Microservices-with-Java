@@ -62,8 +62,6 @@ eureka:
         serviceUrl:
             defaultZone: ${vcap.services.${PREFIX:}eureka.credentials.uri:http://user:password@localhost:8761}/eureka/
         fetchRegistry: true
-        healthcheck:
-            enabled: true
 
 logging:
     level:

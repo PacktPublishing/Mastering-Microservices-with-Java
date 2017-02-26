@@ -29,8 +29,6 @@ eureka:
 logging:
   level:
     root: INFO
-    se.callista: INFO
-    # Set DEBUG level on Hystrix to get an error message when a fallback method is used.
     com.netflix.hystrix: INFO
 
 
