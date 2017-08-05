@@ -1,5 +1,11 @@
+/* below relative path tested with node v6.11.1 and npm 3.10.10 */
+$icon-font-path: "../../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+@import "../../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
+
+/* below path works with few older node/npm version 
 $icon-font-path: "bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 @import "bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
+*/
 
 .bs-docs-footer {
     padding-top: 40px;
