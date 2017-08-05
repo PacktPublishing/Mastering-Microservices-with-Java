@@ -1,7 +1,27 @@
-# angular-seed — the seed for AngularJS apps
+# OTRU UI developed using Angular Seed
 
-This project is an application skeleton for a typical [AngularJS](http://angularjs.org/) web app.
-You can use it to quickly bootstrap your angular webapp projects and dev environment for these
+## Steps to executed the UI app
+
+1. Install gulp if not already installed.
+    ```
+    npm install --no-optional gulp
+    ```
+2. Install gulp utilities. Ignore if already installed.
+    ```
+    npm install --save --no-optional gulp-util gulp-clean gulp-connect gulp-file-include run-sequence gulp-angular-templatecache gulp-sass
+    ```
+3. Install bower modules
+    ```
+    bower install --save
+    ```
+4. Only running gulp without any argument would trigger the default task - ['connect', 'build', 'watch']
+    ```
+    gulp
+    ```
+
+
+## Angular Seed
+[AngularJS](http://angularjs.org/) can quickly bootstrap your angular webapp projects and dev environment for these
 projects.
 
 The seed contains a sample AngularJS application and is preconfigured to install the Angular
