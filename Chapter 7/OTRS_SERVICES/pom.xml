@@ -21,7 +21,6 @@
         <module>turbine-server</module>
         <module>common</module>
         <module>user-service</module>
-        <module>security-service</module>
         <module>api-service</module>
         <module>booking-service</module>
     </modules>
