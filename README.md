@@ -1,3 +1,8 @@
+> #### *This repo contains code of 1st edition.*
+> ### You may want to explore 3rd edition;
+> - **Code**: [Mastering Microservices with Java - 3rd Edition](https://github.com/PacktPublishing/Mastering-Microservices-with-Java-Third-Edition)
+> - **Book**: [Mastering Microservices with Java: Build enterprise microservices with Spring Boot 2.0, Spring Cloud, and Angular, 3rd Edition](https://amzn.to/2VW3UyU)
+
 # Mastering-Microservices-with-Java (First Edition)
 
 [Mastering Microservices with Java] (https://www.packtpub.com/application-development/mastering-microservices-java?utm_source=github&utm_medium=repository&utm_campaign=9781785285172) by Packt Publishing
